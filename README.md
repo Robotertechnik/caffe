@@ -1,5 +1,14 @@
 # Caffe
 
+The main purpose of this repository is to work on semantic segmentation using FCNN.
+
+This repository merges pull request #1976 (crop layer) and #2016 (Share convolution buffers to reduce memory 
+usage) .
+
+It includes a makefile.config that allows it to run on Mac OSX 10.10.4 and on CPU mode.
+
+Available information for installation exists in this [website] (http://installing-caffe-the-right-way.wikidot.com/start)
+
 Caffe is a deep learning framework made with expression, speed, and modularity in mind.
 It is developed by the Berkeley Vision and Learning Center ([BVLC](http://bvlc.eecs.berkeley.edu)) and community contributors.
 
