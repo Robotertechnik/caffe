@@ -1,13 +1,13 @@
 # Make sure that caffe is on the python path:
-caffe_root = '../../'  # this file is expected to be in {caffe_root}/examples
+caffe_root = '../../../'  # this file is expected to be in {caffe_root}/examples
 import sys
 sys.path.insert(0, caffe_root + 'python')
 
 import caffe
 
 # Load the original network and extract the fully connected layers' parameters.
-net = caffe.Net('../../models/bvlc_alexnet/deploy.prototxt',
-                '../../models/bvlc_alexnet/bvlc_alexnet.caffemodel',
+net = caffe.Net('../../bvlc_alexnet/deploy.prototxt',
+                '../../bvlc_alexnet/bvlc_alexnet.caffemodel',
                 caffe.TEST)
 params = ['fc6', 'fc7', 'fc8']
 # fc_params = {name: (weights, biases)}
@@ -15,7 +15,7 @@ fc_params = {pr: (net.params[pr][0].data, net.params[pr][1].data) for pr in para
 
 # Load the fully convolutional network to transplant the parameters.
 net_full_conv = caffe.Net('deploy_fullconv.prototxt',
-                          '../../models/bvlc_alexnet/bvlc_alexnet.caffemodel',
+                          '../../bvlc_alexnet/bvlc_alexnet.caffemodel',
                           caffe.TEST)
 params_full_conv = ['fc6-conv', 'fc7-conv', 'fc8-conv']
 # conv_params = {name: (weights, biases)}

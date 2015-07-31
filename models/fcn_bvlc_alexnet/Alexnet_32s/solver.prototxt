@@ -1,4 +1,4 @@
-net: "train_val2.prototxt"
+net: "train_val.prototxt"
 test_iter: 736
 test_interval: 1000000 # py solving tests
 display: 20
@@ -12,7 +12,7 @@ iter_size: 20
 # iter_size: 1
 max_iter: 80000
 weight_decay: 0.0005
-snapshot: 100
-snapshot_prefix: "train"
+snapshot: 500
+snapshot_prefix: "snapshot/train"
 test_initialization: false
 

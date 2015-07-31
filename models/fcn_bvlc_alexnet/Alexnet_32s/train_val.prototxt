@@ -1,4 +1,4 @@
-name: "FCN-camvid-Alexnet"
+name: "FCN_Alexnet_32s"
 layer {
   name: "data"
   type: "Data"
@@ -12,7 +12,7 @@ layer {
     mean_value: 122.67892
   }
   data_param {
-    source: "../../data/camvid/701_StillsRaw_full/camvid-data"
+    source: "../../../data/camvid/701_StillsRaw_full/camvid-train-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -30,7 +30,7 @@ layer {
     mean_value: 122.67892
   }
   data_param {
-    source: "../../data/CamSeq01/camseq01-lmdb"
+    source: "../../../data/camvid/701_StillsRaw_full/camvid-test-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -43,7 +43,7 @@ layer {
     phase: TRAIN
   }
   data_param {
-    source: "../../data/camvid/LabeledApproved_full/camvid-gt"
+    source: "../../../data/camvid/LabeledApproved_full/camvid_train-gt-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -56,7 +56,7 @@ layer {
     phase: TEST
   }
   data_param {
-    source: "../../data/CamSeq01/camseq01_gt-lmdb"
+    source: "../../../data/camvid/LabeledApproved_full/camvid_test-gt-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -383,7 +383,7 @@ layer {
     decay_mult: 0
   }
   convolution_param {
-    num_output: 32
+    num_output: 11
     kernel_size: 1
     engine: CAFFE
   weight_filler {
@@ -404,7 +404,7 @@ layer {
     lr_mult: 0
   }
   convolution_param {
-    num_output: 32
+    num_output: 11
     kernel_size: 63
     stride: 32
   }

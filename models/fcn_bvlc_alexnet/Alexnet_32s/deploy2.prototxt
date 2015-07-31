@@ -1,4 +1,4 @@
-name: "FCN_AlexNet"
+name: "FCN_AlexNet_32s"
 
 input: "data"
 input_dim: 1
