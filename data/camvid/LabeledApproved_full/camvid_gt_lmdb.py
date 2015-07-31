@@ -55,4 +55,4 @@ with in_db.begin(write=True) as in_txn:
         in_txn.put('{:0>10d}'.format(in_idx), im_dat.SerializeToString())
 in_db.close()
 
-print 'camvid train gt done'
+print 'camvid test gt done'
