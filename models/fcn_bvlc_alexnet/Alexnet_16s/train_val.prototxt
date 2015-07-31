@@ -387,7 +387,6 @@ layer {
     }
   }
 }
-#layer { type: 'Crop' name: 'crop' bottom: 'score-pool2' bottom: 'upsample-cs-16'
 layer { type: 'Crop' name: 'crop' bottom: 'score-pool2' bottom: 'bigscore-new'
   top: 'score-pool2c' }
 layer {
