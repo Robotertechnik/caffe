@@ -2,6 +2,8 @@ This is a pre-release Caffe branch for fully convolutional networks. This includ
 
 Everything here is subject to change, including the history of this branch.
 
-Consider PR #2016 for reducing memory usage.
+PR #2016 for reducing memory usage.
+
+PR #1946 for MSRA initialization.
 
 See `future.sh` for details.
