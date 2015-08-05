@@ -94,7 +94,7 @@ inputs = f.read().splitlines()
 inputs = [inputs[i] for i in ridx]
 f.close()
 
-in_db = lmdb.open('D:\camvid_test-gt-lmdb', map_size=int(1e9))
+in_db = lmdb.open('camvid_test-gt-lmdb', map_size=int(1e9))
 with in_db.begin(write=True) as in_txn:
     for in_idx, in_ in enumerate(inputs):
         im = Image.open(in_) # load image
