@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 import caffe
 
 # load image, switch to BGR, subtract mean, and make dims C x H x W for Caffe
-im = np.array(Image.open('../../../data/camvid/701_StillsRaw_full/0006R0_f01590.png').resize((240, 180), Image.ANTIALIAS))
+im = np.array(Image.open('../../../data/camvid/701_StillsRaw_full/0006R0_f01590.png'))
+#im = np.array(Image.open('../../../data/camvid/701_StillsRaw_full/0006R0_f01590.png').resize((240, 180), Image.ANTIALIAS))
 in_ = np.array(im, dtype=np.float32)
 in_ = in_[:,:,::-1]
 in_ -= np.array((104.00698793,116.66876762,122.67891434))
