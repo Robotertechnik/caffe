@@ -1,9 +1,67 @@
 name: "FCN_Alexnet_8s"
-input: "data"
-input_dim: 1
-input_dim: 3
-input_dim: 250
-input_dim: 250
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mean_value: 104.00699
+    mean_value: 116.66877
+    mean_value: 122.67892
+  }
+  data_param {
+    source: "../../../examples/convert_lmdb_camvid/camvid_train-lmdb"
+    batch_size: 1
+    backend: LMDB
+  }
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mean_value: 104.00699
+    mean_value: 116.66877
+    mean_value: 122.67892
+  }
+  data_param {
+    source: "../../../examples/convert_lmdb_camvid/camvid_test-lmdb"
+    batch_size: 1
+    backend: LMDB
+  }
+}
+layer {
+  name: "label"
+  type: "Data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+  data_param {
+    source: "../../../examples/convert_lmdb_camvid/camvid_train-gt-lmdb"
+    batch_size: 1
+    backend: LMDB
+  }
+}
+layer {
+  name: "label"
+  type: "Data"
+  top: "label"
+  include {
+    phase: TEST
+  }
+  data_param {
+    source: "../../../examples/convert_lmdb_camvid/camvid_test-gt-lmdb"
+    batch_size: 1
+    backend: LMDB
+  }
+}
+
 layer {
   name: "conv1"
   type: "Convolution"
@@ -272,6 +330,14 @@ layer {
     num_output: 11
     kernel_size: 1
     engine: CAFFE
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
   }
 }
 layer {
@@ -308,6 +374,14 @@ layer {
     num_output: 11
     kernel_size: 1
     engine: CAFFE
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
   }
 }
 layer { type: 'Crop' name: 'crop' bottom: 'score-pool2' bottom: 'bigscore-new'
@@ -355,6 +429,14 @@ layer {
     num_output: 11
     kernel_size: 1
     engine: CAFFE
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
   }
 }
 layer { type: 'Crop' name: 'crop' bottom: 'score-pool1' bottom: 'score2'
@@ -385,3 +467,14 @@ layer {
   }
 }
 layer { type: 'Crop' name: 'crop' bottom: 'bigscore' bottom: 'data' top: 'score' }
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "score"
+  bottom: "label"
+  top: "loss"
+  loss_param {
+    ignore_label: 255
+    normalize: true
+  }
+}
