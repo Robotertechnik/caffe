@@ -36,7 +36,7 @@ def main():
     for file in listing:
     	# load image, switch to BGR, subtract mean, and make dims C x H x W for Caffe
     	args = parse_args()
-    	im = np.array(Image.open(args.input_image_file+file))
+    	im = np.array(Image.open(args.input_image_directory+file))
     	in_ = np.array(im, dtype=np.float32)
     	in_ = in_[:,:,::-1]
     	in_ -= np.array((104.00698793,116.66876762,122.67891434))
