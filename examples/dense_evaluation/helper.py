@@ -162,6 +162,8 @@ def pxEval_maximizeFMeasure(totalPosNum, totalNegNum, totalFN, totalFP, thresh =
     #prob_eval_scores['precision_bst'] = precision_bst
     #prob_eval_scores['recall_bst'] = recall_bst
     prob_eval_scores['thresh'] = thresh
+    #IoU
+    prob_eval_scores['IoU'] = Q
     if thresh != None:
         BestThresh= thresh[index]
         prob_eval_scores['BestThresh'] = BestThresh
@@ -182,7 +184,7 @@ def calcEvalMeasures(evalDict, tag  = '_wp'):
     TN = evalDict[:,1].astype('f4')
     FP = evalDict[:,2].astype('f4')
     FN = evalDict[:,3].astype('f4')
-    Q = TP / (TP + FP + FN)
+    Q = TP / (TP + FP + FN) # Q is equal to IoU (Intersection over Union)
     P = TP + FN
     N = TN + FP
     TPR = TP / P
