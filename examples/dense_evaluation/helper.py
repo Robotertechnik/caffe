@@ -147,6 +147,9 @@ def pxEval_maximizeFMeasure(totalPosNum, totalNegNum, totalFN, totalFP, thresh =
     valuesMaxF[0,2] = FP
     valuesMaxF[0,3] = FN
 
+    # Intersection over Union
+    Q = TP / (TP + FP + FN)
+
     #ACC = (totalTP+ totalTN)/(totalPosNum+totalNegNum)
     prob_eval_scores  = calcEvalMeasures(valuesMaxF)
     prob_eval_scores['AvgPrec'] = AvgPrec
@@ -163,7 +166,7 @@ def pxEval_maximizeFMeasure(totalPosNum, totalNegNum, totalFN, totalFP, thresh =
     #prob_eval_scores['recall_bst'] = recall_bst
     prob_eval_scores['thresh'] = thresh
     #IoU
-    prob_eval_scores['IoU'] = Q
+    prob_eval_scores['IoU'] = IoU
     if thresh != None:
         BestThresh= thresh[index]
         prob_eval_scores['BestThresh'] = BestThresh
