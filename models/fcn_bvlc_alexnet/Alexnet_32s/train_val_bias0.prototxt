@@ -12,7 +12,7 @@ layer {
     mean_value: 122.67892
   }
   data_param {
-    source: "../../../data/camvid/701_StillsRaw_full/camvid-train-lmdb"
+    source: "../../../examples/convert_lmdb_camvid/camvid_train-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -30,7 +30,7 @@ layer {
     mean_value: 122.67892
   }
   data_param {
-    source: "../../../data/camvid/701_StillsRaw_full/camvid-test-lmdb"
+    source: "../../../examples/convert_lmdb_camvid/camvid_test-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -43,7 +43,7 @@ layer {
     phase: TRAIN
   }
   data_param {
-    source: "../../../data/camvid/LabeledApproved_full/camvid_train-gt-lmdb"
+    source: "../../../examples/convert_lmdb_camvid/camvid_train-gt-lmdb"
     batch_size: 1
     backend: LMDB
   }
@@ -56,7 +56,7 @@ layer {
     phase: TEST
   }
   data_param {
-    source: "../../../data/camvid/LabeledApproved_full/camvid_test-gt-lmdb"
+    source: "../../../examples/convert_lmdb_camvid/camvid_test-gt-lmdb"
     batch_size: 1
     backend: LMDB
   }

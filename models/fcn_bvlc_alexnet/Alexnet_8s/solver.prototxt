@@ -12,7 +12,7 @@ iter_size: 20
 # iter_size: 1
 max_iter: 80000
 weight_decay: 0.0005
-snapshot: 5000
+snapshot: 1
 snapshot_prefix: "snapshot/train"
 test_initialization: false
 

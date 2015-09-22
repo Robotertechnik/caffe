@@ -311,6 +311,7 @@ layer {
   }
 }
 layer { type: 'Crop' name: 'crop' bottom: 'score-pool2' bottom: 'bigscore-new'
+# layer { type: 'Crop' name: 'crop' bottom: 'score-pool2' bottom: 'upsample-cs-16'
   top: 'score-pool2c' }
 layer {
   name: "fuse"
