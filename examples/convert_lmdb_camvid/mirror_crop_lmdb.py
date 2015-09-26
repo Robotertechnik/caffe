@@ -12,7 +12,6 @@ inputs = f.read().splitlines()
 f.close()
 for in_idx, in_ in enumerate (inputs):
 	im = Image.open('../../data/camvid/LabeledApproved_full/'+in_)
-	im = ImageOps.mirror(im)
 	im = im.resize((int(im.size[0]*0.5),int(im.size[1]*0.5)),Image.NEAREST)
 	im.save('../../data/camvid/LabeledApproved_full/'+'R'+in_)
 #Cropping + Mirroring
