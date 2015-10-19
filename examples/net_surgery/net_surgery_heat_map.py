@@ -1,5 +1,5 @@
 # Make sure that caffe is on the python path:
-caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
+caffe_root = '../../'  # this file is expected to be in {caffe_root}/examples
 import sys
 sys.path.insert(0, caffe_root + 'python')
 
@@ -7,8 +7,8 @@ import caffe
 
 # Load the original network and extract the fully-connected layers' parameters.
 caffe.set_mode_cpu()
-net = caffe.Net('../models/bvlc_reference_caffenet/deploy.prototxt',
-                '../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel',
+net = caffe.Net('../../models/bvlc_reference_caffenet/deploy.prototxt',
+                '../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel',
                 caffe.TEST)
 params = ['fc6', 'fc7', 'fc8']
 
@@ -19,8 +19,8 @@ for fc in params:
     print '{} weights are {} dimensional and biases are {} dimensional'.format(fc, fc_params[fc][0].shape, fc_params[fc][1].shape)
 
 # Load the fully-convolutional network to transplant the parameters.
-net_full_conv = caffe.Net('net_surgery/bvlc_caffenet_full_conv.prototxt',
-                          '../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel',
+net_full_conv = caffe.Net('bvlc_caffenet_full_conv.prototxt',
+                          '../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel',
                           caffe.TEST)
 params_full_conv = ['fc6-conv', 'fc7-conv', 'fc8-conv']
 # conv_params = {name: (weights, biases)}
@@ -37,16 +37,17 @@ for pr, pr_conv in zip(params, params_full_conv):
     W = fc_params[pr][0].reshape((out, in_, h, w))
     conv_params[pr_conv][0][...] = W
 
-net_full_conv.save('imagenet/bvlc_caffenet_full_conv.caffemodel')
+net_full_conv.save('../imagenet/bvlc_caffenet_full_conv.caffemodel')
 
 import numpy as np
 import matplotlib.pyplot as plt
 #%matplotlib inline
 
 # load input and configure preprocessing
-im = caffe.io.load_image('images/cat.jpg')
+# im = caffe.io.load_image('../images/cat.jpg')
+im = caffe.io.load_image('car.png')
 transformer = caffe.io.Transformer({'data': net_full_conv.blobs['data'].data.shape})
-transformer.set_mean('data', np.load('../python/caffe/imagenet/ilsvrc_2012_mean.npy').mean(1).mean(1))
+transformer.set_mean('data', np.load('../../python/caffe/imagenet/ilsvrc_2012_mean.npy').mean(1).mean(1))
 transformer.set_transpose('data', (2,0,1))
 transformer.set_channel_swap('data', (2,1,0))
 transformer.set_raw_scale('data', 255.0)

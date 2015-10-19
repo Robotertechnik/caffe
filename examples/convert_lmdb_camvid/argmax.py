@@ -14,7 +14,7 @@ net = caffe.Net('../googlenet_12outputs/late_deploy.prototxt', '../googlenet_12o
 
 for in_idx, in_ in enumerate(inputs):
     im = Image.open('../../data/camvid/701_StillsRaw_full/'+in_+'.png')
-    im = im.resize((int(im.size[0]*0.5),int(im.size[1]*0.5)),Image.ANTIALIAS)
+    #im = im.resize((int(im.size[0]*0.5),int(im.size[1]*0.5)),Image.ANTIALIAS) #The program crashes
     in_ = np.array(im, dtype=np.float32)
     in_ = in_[:,:,::-1]
     in_ -= np.array((104.00698793,116.66876762,122.67891434))
@@ -26,7 +26,7 @@ for in_idx, in_ in enumerate(inputs):
     net.forward()
     out = net.blobs['score'].data[0].argmax(axis=0)
     # save image
-    scipy.misc.imsave('small_inputs/argmax'+str(in_idx+1).zfill(5)+'.pgm' , out)
+    scipy.misc.imsave('inputs/argmax-'+str(in_idx+1).zfill(5)+'.pgm' , out)
 
 print 'camvid done'
 
